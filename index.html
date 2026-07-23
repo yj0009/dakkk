@@ -376,6 +376,45 @@
     border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;
     align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-faint);
   }
+  .footer-legal{display:flex;gap:18px;flex-wrap:wrap;}
+  .footer-legal button{
+    background:none;border:none;padding:0;font:inherit;font-size:12px;color:var(--ink-faint);
+    text-decoration:underline;cursor:pointer;
+  }
+  .footer-legal button:hover{color:var(--ink);}
+
+  /* ---------- CONSENT CHECKBOX ---------- */
+  .consent-row{margin-top:4px;}
+  .consent-label{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ink-soft);cursor:pointer;line-height:1.55;}
+  .consent-label input[type="checkbox"]{margin-top:3px;width:16px;height:16px;flex-shrink:0;accent-color:var(--accent);cursor:pointer;}
+  .consent-label button{
+    background:none;border:none;padding:0;font:inherit;font-size:inherit;
+    color:var(--accent-dark);font-weight:600;text-decoration:underline;cursor:pointer;
+  }
+
+  /* ---------- CONTENT MODAL (Privacy / Terms) ---------- */
+  .content-modal-overlay{
+    display:none;position:fixed;inset:0;z-index:300;
+    background:rgba(21,24,27,0.6);align-items:center;justify-content:center;padding:20px;
+  }
+  .content-modal-overlay.open{display:flex;}
+  .content-modal-card{
+    background:var(--bg-raised);border-radius:var(--radius);
+    width:100%;max-width:640px;max-height:82vh;overflow-y:auto;
+    padding:32px 32px 28px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.25);
+  }
+  .content-modal-card h3{font-size:22px;margin-bottom:2px;}
+  .content-modal-card h4{font-size:14px;margin-top:18px;margin-bottom:4px;letter-spacing:0.02em;}
+  .content-modal-card p{font-size:13.5px;color:var(--ink-soft);line-height:1.65;margin:0 0 10px;}
+  .content-modal-card ul{padding-left:18px;margin:4px 0 12px;}
+  .content-modal-card li{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:3px;}
+  .content-modal-meta{font-size:11px;color:var(--ink-faint);margin-bottom:14px;}
+  .content-modal-close{
+    position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;
+    background:var(--bg);border:1px solid var(--line);font-size:15px;line-height:1;
+    cursor:pointer;color:var(--ink-soft);
+  }
+  .content-modal-close:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:860px){
@@ -426,7 +465,7 @@
       <a href="#process">How we work</a>
       <a href="#pricing">Pricing</a>
       <a href="#portfolio">Portfolio</a>
-      <a href="#proof">Results</a>
+      <!-- <a href="#proof">Results</a> — hidden until we have real client testimonials -->
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
@@ -596,7 +635,8 @@
     </div>
   </section>
 
-  <!-- PROOF -->
+  <!-- PROOF section hidden until we have real client testimonials to show.
+       Delete the wrapping comment tags below (and re-enable the nav link above) once ready.
   <section class="proof" id="proof">
     <div class="wrap">
       <div class="sec-head reveal-up">
@@ -623,6 +663,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- CONTACT -->
   <section class="contact" id="contact">
@@ -632,7 +673,7 @@
         <h2>Free website & SEO audit</h2>
         <p>Tell us about your business and we'll send back a short, honest breakdown of what's working, what isn't, and what we'd fix first — no obligation.</p>
         <div class="contact-detail">
-          <span>📧 hello@darkkagency.com</span>
+          <span>📧 hello@darkk.com</span>
           <span>📍 Serving contractors across Mumbai & Maharashtra</span>
         </div>
       </div>
@@ -683,7 +724,7 @@
           <div class="form-row">
             <div>
               <label for="city">City</label>
-              <input type="text" id="city" name="City" placeholder="e.g. Mumbai">
+              <input type="text" id="city" name="City" placeholder="e.g. Toronto">
             </div>
             <div>
               <label for="service-location">Location of service</label>
@@ -707,7 +748,7 @@
             <label for="yt">YouTube</label>
             <input type="text" id="yt" name="YouTube" placeholder="youtube.com/@yourbusiness">
           </div>
-          <p class="form-hint">👉 Once you submit, your complete audit will be sent to you within 1–3 hours.</p>
+          <p class="form-hint">NOTE : Once you submit, your complete audit will be sent to you within 1–3 hours.</p>
         </div>
 
         <div id="build-fields" style="display:none;">
@@ -722,11 +763,23 @@
                 <option value="+1 (CAN)">Canada (+1)</option>
                 <option value="Other">Other</option>
               </select>
-              <input type="text" id="country-code-other" name="CountryCodeOther" placeholder="+91" style="display:none;">
+              <input type="text" id="country-code-other" name="CountryCodeOther" placeholder="+1" style="display:none;">
               <input type="tel" id="phone" name="Phone" placeholder="Mobile number">
             </div>
           </div>
-          <p class="form-hint">👉 We'll reach out to you by email — thank you!</p>
+          <p class="form-hint"> We'll reach out to you by email. thank you!</p>
+        </div>
+
+        <div class="full consent-row">
+          <label class="consent-label">
+            <input type="checkbox" id="consent" name="Consent" required>
+            <span>
+              I agree to the <button type="button" onclick="openContent('privacy')">Privacy Policy</button>
+              and <button type="button" onclick="openContent('terms')">Terms &amp; Conditions</button>,
+              and I consent to DARKK collecting, storing and processing the information I've provided above
+              in accordance with the IT law.
+            </span>
+          </label>
         </div>
 
         <button type="submit" class="btn btn-accent" id="submit-btn">Send &amp; get my audit</button>
@@ -759,16 +812,28 @@
       </div>
       <div class="footer-col">
         <h5>Follow</h5>
-        <a href="https://www.instagram.com/darkk.agency" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.facebook.com/darkkagency" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/ig.darkk.space" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/darkk.space" target="_blank" rel="noopener">Facebook</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Darkk. All rights reserved.</span>
-      <span>Serving roofing, landscaping &amp; construction businesses across Maharashtra</span>
+      <span>Serving roofing, landscaping &amp; construction businesses across the Globe.</span>
+      <span class="footer-legal">
+        <button type="button" onclick="openContent('privacy')">Privacy Policy</button>
+        <button type="button" onclick="openContent('terms')">Terms &amp; Conditions</button>
+      </span>
     </div>
   </div>
 </footer>
+
+<!-- PRIVACY / TERMS MODAL -->
+<div class="content-modal-overlay" id="content-modal">
+  <div class="content-modal-card">
+    <button class="content-modal-close" onclick="closeContentModal()" aria-label="Close">✕</button>
+    <div id="content-modal-body"></div>
+  </div>
+</div>
 
 <script>
   // Scroll-reveal animation — components fade/slide into place as they enter view
