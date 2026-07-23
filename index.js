@@ -99,53 +99,104 @@ const textVault = {
     <p>At DARKK, we believe every business deserves access to powerful digital tools, regardless of its size. Whether you're a startup, small business, or growing enterprise, we work closely with you to transform ideas into impactful digital experiences. We focus on innovation, performance, and client success, ensuring every project is built with quality, scalability, and future growth in mind.</p>
   `,
   privacy: `
-    <h3 class="text-xl font-bold text-neutral-900 mb-1">Privacy Policy</h3>
-    <p class="text-xs text-neutral-400 mb-4">Last Updated: July 2026</p>
+    <h3>Privacy Policy</h3>
+    <p class="content-modal-meta">Last updated: July 2026</p>
 
-    <p class="mb-3">DARKK ("we," "us," "our") values your privacy. This policy explains exactly what information we collect through this website, why, and how it's handled.</p>
+    <p>DARKK ("we," "us," "our") values your privacy. This policy explains what information we collect through this website, why, and how it's handled. It is designed to meet the requirements of major global data protection frameworks, including the EU/UK GDPR, Australia's Privacy Act, Canada's PIPEDA, applicable U.S. state privacy laws (e.g. CCPA/CPRA), and India's Digital Personal Data Protection Act, 2023.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Information We Collect</h4>
-    <p class="mb-1">When you submit our contact/audit form, we collect only what you provide:</p>
-    <ul class="list-disc pl-5 mb-3 space-y-0.5">
+    <h4>Information We Collect</h4>
+    <p>When you submit our contact/audit form, we collect only what you provide:</p>
+    <ul>
       <li>Name / company name</li>
       <li>Email address</li>
       <li>Phone number (if provided)</li>
       <li>Country / city / service location</li>
       <li>Business details you share (website URL, social media handles, service needed)</li>
     </ul>
-    <p class="mb-3">We also automatically capture your IP address at the moment of submission. This is used solely to prevent spam by limiting how many submissions can be sent from the same address in a 24-hour period — it is not used to track you across the web or shared for advertising.</p>
+    <p>We also automatically capture your IP address at the moment of submission. This is used solely to prevent spam by limiting how many submissions can be sent from the same address in a 24-hour period — it is not used to track you across the web or shared for advertising.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">No Cookies or Tracking Scripts</h4>
-    <p class="mb-3">This website does not use cookies, tracking pixels, or third-party analytics scripts to monitor visitor behavior. The only data we receive is what you actively submit through our form.</p>
+    <h4>No Cookies or Tracking Scripts</h4>
+    <p>This website does not use cookies, tracking pixels, or third-party analytics scripts to monitor visitor behaviour. The only data we receive is what you actively submit through our form.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Where Your Data Is Stored</h4>
-    <p class="mb-3">Form submissions are stored securely in Google Firebase (Firestore), Google's cloud database service, in a private collection accessible only to DARKK. We do not use spreadsheets or any other third-party tool to store your information.</p>
+    <h4>Consent</h4>
+    <p>By checking the consent box on our form and submitting it, you provide your free, informed, specific and unambiguous consent for us to collect and process the personal data listed above for the purposes described in this policy. You may withdraw this consent at any time by contacting us; withdrawal will not affect the lawfulness of processing carried out before that point.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">How We Use Your Information</h4>
-    <p class="mb-1">We use it only to:</p>
-    <ul class="list-disc pl-5 mb-3 space-y-0.5">
+    <h4>Where Your Data Is Stored</h4>
+    <p>Form submissions are stored securely in Google Firebase (Firestore), Google's cloud database service, in a private collection accessible only to DARKK. We do not use spreadsheets or any other third-party tool to store your information.</p>
+
+    <h4>International Data Transfers</h4>
+    <p>DARKK works with clients across multiple countries. Depending on where you're located, submitting our form may involve your data being transferred to and stored on servers outside your home country. Where required by your local law (for example, if you're in the EEA, UK, or Switzerland), we rely on appropriate safeguards for any such transfer, and you may request details of these safeguards by contacting us.</p>
+
+    <h4>How We Use Your Information</h4>
+    <p>We use it only to:</p>
+    <ul>
       <li>Respond to your inquiry and prepare your requested audit or quote</li>
       <li>Deliver the service you've asked for</li>
-      <li>Maintain basic business and security records</li>
+      <li>Maintain basic business, consent and security records</li>
     </ul>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Information Sharing</h4>
-    <p class="mb-3">We do not sell, rent, or share your information with any third party for marketing or advertising purposes. If we ever want to use your details beyond responding to your inquiry — for example, featuring your business as a case study — we will contact you directly and ask for your explicit consent first.</p>
+    <h4>Information Sharing</h4>
+    <p>We do not sell, rent, or share your information with any third party for marketing or advertising purposes. If we ever want to use your details beyond responding to your inquiry — for example, featuring your business as a case study — we will contact you directly and ask for your explicit consent first.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Data Retention</h4>
-    <p class="mb-3">We retain form submissions for as long as necessary to respond to your inquiry and maintain business records, and no longer than 24 months unless you become a client — in which case we retain it for the duration of our working relationship plus any legally required period afterward.</p>
+    <h4>Data Retention</h4>
+    <p>We retain form submissions for as long as necessary to respond to your inquiry and maintain business records, and no longer than 24 months unless you become a client — in which case we retain it for the duration of our working relationship plus any legally required period afterward.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Your Rights</h4>
-    <p class="mb-3">Wherever you're located — including under UK/EU GDPR, the Australian Privacy Act, Canada's PIPEDA, or U.S. state privacy laws — you can request access to, correction of, or deletion of your personal information at any time by contacting us.</p>
+    <h4>Your Rights</h4>
+    <p>Wherever you're located, you can request access to, correction of, withdrawal of consent for, or deletion of your personal information at any time by contacting us. Depending on your jurisdiction, this may include specific rights such as data portability, objection to processing, or lodging a complaint with your local data protection authority (for example, under GDPR, the Australian Privacy Act, PIPEDA, or applicable U.S. state privacy laws).</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Data Security</h4>
-    <p class="mb-3">Your information is stored on Firebase, which uses encryption in transit and at rest. Access to our database is restricted to authorized DARKK personnel only.</p>
+    <h4>Data Security</h4>
+    <p>Your information is stored on Firebase, which uses encryption in transit and at rest. Access to our database is restricted to authorised DARKK personnel only.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Changes to This Policy</h4>
-    <p class="mb-3">We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date.</p>
+    <h4>Changes to This Policy</h4>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date.</p>
 
-    <h4 class="font-semibold text-neutral-900 mt-3 mb-1">Contact Us</h4>
-    <p>For privacy-related questions or requests, please contact us at [add your business email here].</p>
+    <h4>Contact Us</h4>
+    <p>For privacy-related questions, rights requests, or complaints, please contact us at hello@darkkagency.com.</p>
+  `,
+  terms: `
+    <h3>Terms &amp; Conditions</h3>
+    <p class="content-modal-meta">Last updated: July 2026</p>
+
+    <p>DARKK ("we," "us," "our") is a digital agency providing website design, local SEO, and content marketing services to businesses worldwide. These Terms & Conditions ("Terms") form a binding agreement between DARKK and any person or business ("you," "Client") who submits a form on, or otherwise uses, this website, wherever you are located. By submitting our contact/audit form, engaging our services, or otherwise using this site, you agree to be bound by these Terms.</p>
+
+    <h4>Nature &amp; Scope of Services</h4>
+    <p>DARKK provides websites, local SEO, and content/social media systems primarily for roofing, landscaping, and construction businesses. The specific scope, timeline, and deliverables for any paid engagement will be set out in a separate quote or service agreement. These Terms govern the website and the general relationship; they do not replace a signed statement of work.</p>
+
+    <h4>Accuracy of Information</h4>
+    <p>You agree to provide accurate, current and complete information when submitting our form. We are not responsible for delays, errors, or inaccuracies in any audit, quote, or deliverable resulting from incomplete or incorrect information you've supplied.</p>
+
+    <h4>Engagement Process</h4>
+    <p>Submitting our website form is an inquiry, not a binding order. A binding engagement is formed only once we provide a written quote or proposal and you confirm acceptance of it, and/or a formal service agreement is signed by both parties.</p>
+
+    <h4>Fees &amp; Payment</h4>
+    <p>Where paid Services are engaged, fees, payment schedule and currency will be specified in the applicable quote or service agreement. Fees are exclusive of any taxes, duties or levies applicable in either party's jurisdiction. Clients are responsible for any currency conversion or bank charges on their end.</p>
+
+    <h4>Intellectual Property</h4>
+    <p>All content on this website — text, graphics, logos and design — is the property of DARKK unless otherwise stated. Upon full payment for a completed project, ownership of the final agreed Deliverables transfers to the Client, unless the applicable agreement states otherwise. DARKK retains the right to showcase completed work in its own portfolio unless the Client requests otherwise in writing.</p>
+
+    <h4>Client-Provided Content</h4>
+    <p>You are responsible for ensuring any content, images or materials you provide for use in a project do not infringe any third party's rights, and agree to indemnify DARKK against any claim arising from content you have supplied.</p>
+
+    <h4>No Guarantee of Results</h4>
+    <p>While we aim to deliver high-quality websites, SEO and content strategies, we do not guarantee specific rankings, traffic, leads or revenue outcomes, as these depend on factors outside our control, including search engine algorithm changes and market conditions.</p>
+
+    <h4>Limitation of Liability</h4>
+    <p>To the maximum extent permitted by applicable law, DARKK's total liability shall not exceed the total fees paid by the Client for the engagement giving rise to the claim, and DARKK shall not be liable for indirect, incidental or consequential loss. Nothing here excludes liability that cannot lawfully be excluded under the mandatory consumer protection law of the Client's home jurisdiction.</p>
+
+    <h4>International Clients &amp; Data Protection</h4>
+    <p>DARKK works with clients across multiple countries and delivers Services remotely. You remain responsible for ensuring your own use of the Deliverables complies with the laws applicable in your own country. Personal data you provide is processed in accordance with our Privacy Policy, designed to meet the requirements of major global data protection frameworks including the EU/UK GDPR, Australia's Privacy Act, Canada's PIPEDA, and applicable U.S. state privacy laws.</p>
+
+    <h4>Termination</h4>
+    <p>Either party may terminate an ongoing engagement per the notice period in the applicable service agreement. DARKK reserves the right to suspend access to the website or Services in the event of misuse, non-payment, or breach of these Terms.</p>
+
+    <h4>Governing Law &amp; Dispute Resolution</h4>
+    <p>Where a specific governing law is required to resolve a dispute, the parties agree that the law named in the applicable signed service agreement shall apply. The parties will first attempt to resolve any dispute through good-faith negotiation; unresolved disputes may be referred to binding arbitration under mutually agreed international arbitration rules (such as ICC or UNCITRAL), conducted remotely wherever possible. This does not remove any statutory consumer-protection rights you may have under the mandatory law of your home jurisdiction.</p>
+
+    <h4>Changes to These Terms</h4>
+    <p>We may update these Terms from time to time. Continued use of this website after changes are posted constitutes acceptance of the revised Terms.</p>
+
+    <h4>Contact Us</h4>
+    <p>For questions about these Terms, please contact us at hello@darkkagency.com.</p>
   `,
   contact: `
     <h3 class="text-xl font-bold text-neutral-900 mb-2">Contact Channels</h3>
@@ -165,18 +216,30 @@ const contentBody = document.getElementById('content-modal-body');
 window.openContent = function(type) {
   if (contentModal && contentBody && textVault[type]) {
     contentBody.innerHTML = textVault[type];
-    contentModal.classList.remove('hidden');
-    contentModal.classList.add('flex');
+    contentModal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    contentModal.scrollTop = 0;
   }
 };
 
 window.closeContentModal = function() {
   if (contentModal) {
-    contentModal.classList.add('hidden');
+    contentModal.classList.remove('open');
     document.body.style.overflow = '';
   }
 };
+
+// Close the privacy/terms modal on outside click or Escape key
+if (contentModal) {
+  contentModal.addEventListener('click', (e) => {
+    if (e.target === contentModal) window.closeContentModal();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && contentModal && contentModal.classList.contains('open')) {
+    window.closeContentModal();
+  }
+});
 
 // ================= LEAD FORM → FIREBASE FIRESTORE INGESTION =================
 // Stores every submission in the "leads" collection, and rate-limits each
@@ -222,6 +285,15 @@ if (leadForm) {
     const btn = document.getElementById('submit-btn');
     const status = document.getElementById('form-status');
     const needValue = leadForm.querySelector('input[name="Need"]:checked')?.value || 'Audit';
+    const consentBox = document.getElementById('consent');
+
+    if (!consentBox || !consentBox.checked) {
+      status.style.display = 'block';
+      status.style.color = '#c0392b';
+      status.textContent = 'Please agree to the Privacy Policy and Terms & Conditions to continue.';
+      consentBox?.focus();
+      return;
+    }
 
     btn.disabled = true;
     btn.textContent = 'Sending...';
@@ -253,7 +325,9 @@ if (leadForm) {
         country,
         ip,
         timestamp: serverTimestamp(),
-        processedState: 'unread'
+        processedState: 'unread',
+        consentGiven: true,
+        consentTimestamp: serverTimestamp()
       };
 
       if (needValue === 'BuildWeb') {
