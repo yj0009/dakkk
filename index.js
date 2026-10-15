@@ -1,10 +1,12 @@
 import { db } from "./firebase.js";
 import {
   collection,
-  doc,
-  getDoc,
-  writeBatch,
-  serverTimestamp
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+  getDocs,
+  Timestamp
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // ================= DYNAMIC PORTFOLIO DATA SETS =================
@@ -240,45 +242,40 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ================= LEAD FORM → FIREBASE FIRESTORE INGESTION =================
-// Every lead goes into "leads" together with a counter bump in "rateLimits"
-// (one atomic batch). Firestore rules enforce the 4-per-24h cap and validate
-// every field, so bypassing this script doesn't bypass the protection.
+// Stores every submission in the "leads" collection, and rate-limits each
+// visitor's IP address to a maximum of 4 submissions per rolling 24 hours.
 const leadForm = document.getElementById('agency-lead-form');
 
 const DAILY_SUBMIT_LIMIT = 4;
-const MIN_FILL_MS = 4000;          // humans can't fill this form in under 4s
-const formLoadedAt = Date.now();
 
-// Honeypot: invisible field real users never touch, bots usually fill in.
-if (leadForm) {
-  const trap = document.createElement('input');
-  trap.type = 'text';
-  trap.id = 'hp-fax-number';
-  trap.name = 'FaxNumber';
-  trap.tabIndex = -1;
-  trap.autocomplete = 'off';
-  trap.setAttribute('aria-hidden', 'true');
-  trap.style.cssText = 'position:absolute;left:-9999px;top:auto;width:1px;height:1px;opacity:0;';
-  leadForm.appendChild(trap);
-}
-
-// Visitor bucket key: public IP, or a random device id if the IP lookup is blocked.
-async function getClientKey() {
+// Looks up the visitor's public IP address (used purely for rate-limiting,
+// not stored anywhere sensitive beyond the leads collection itself).
+async function getClientIP() {
   try {
     const res = await fetch('https://api.ipify.org?format=json');
     const data = await res.json();
-    if (/^[0-9a-fA-F:.]{3,45}$/.test(data.ip || '')) return data.ip;
+    return data.ip || 'unknown';
   } catch (err) {
     console.error('IP lookup failed:', err);
+    return 'unknown';
   }
-  let id = null;
-  try { id = localStorage.getItem('darkk_dev'); } catch (_) {}
-  if (!id) {
-    id = 'dev_' + Array.from(crypto.getRandomValues(new Uint8Array(12)))
-      .map(b => b.toString(16).padStart(2, '0')).join('');
-    try { localStorage.setItem('darkk_dev', id); } catch (_) {}
-  }
-  return id;
+}
+
+// Counts how many leads this IP has submitted in the last 24 hours.
+// If the IP can't be determined, we fail OPEN (allow the submission)
+// rather than blocking a legitimate visitor.
+async function hasReachedDailyLimit(ip) {
+  if (ip === 'unknown') return false;
+
+  const since = Timestamp.fromDate(new Date(Date.now() - 24 * 60 * 60 * 1000));
+  const q = query(
+    collection(db, 'leads'),
+    where('ip', '==', ip),
+    where('timestamp', '>=', since)
+  );
+
+  const snapshot = await getDocs(q);
+  return snapshot.size >= DAILY_SUBMIT_LIMIT;
 }
 
 if (leadForm) {
@@ -289,22 +286,12 @@ if (leadForm) {
     const status = document.getElementById('form-status');
     const needValue = leadForm.querySelector('input[name="Need"]:checked')?.value || 'Audit';
     const consentBox = document.getElementById('consent');
-    const btnLabel = () => (needValue === 'BuildWeb' ? 'Send my request' : 'Send & get my audit');
 
     if (!consentBox || !consentBox.checked) {
       status.style.display = 'block';
       status.style.color = '#c0392b';
       status.textContent = 'Please agree to the Privacy Policy and Terms & Conditions to continue.';
       consentBox?.focus();
-      return;
-    }
-
-    // Bot checks: honeypot filled or form submitted impossibly fast -> fake success, send nothing.
-    const trapFilled = (document.getElementById('hp-fax-number')?.value || '') !== '';
-    if (trapFilled || Date.now() - formLoadedAt < MIN_FILL_MS) {
-      status.style.display = 'block';
-      status.style.color = '#1a7a3c';
-      status.textContent = "Thanks! We'll be in touch.";
       return;
     }
 
@@ -315,27 +302,20 @@ if (leadForm) {
     status.textContent = 'Checking your request...';
 
     try {
-      const key = await getClientKey();
-      const limitRef = doc(db, 'rateLimits', key);
-      const snap = await getDoc(limitRef);
+      const ip = await getClientIP();
 
-      let limitData = { ip: key, count: 1, windowStart: serverTimestamp() };
-      if (snap.exists()) {
-        const d = snap.data();
-        const inWindow = Date.now() - d.windowStart.toMillis() < 24 * 60 * 60 * 1000;
-        if (inWindow) {
-          if (d.count >= DAILY_SUBMIT_LIMIT) {
-            status.style.color = '#c0392b';
-            status.textContent = `You've already sent ${DAILY_SUBMIT_LIMIT} requests today. Please try again tomorrow.`;
-            return;
-          }
-          limitData = { ip: key, count: d.count + 1, windowStart: d.windowStart };
-        }
+      if (await hasReachedDailyLimit(ip)) {
+        status.style.color = '#c0392b';
+        status.textContent = `You've already sent ${DAILY_SUBMIT_LIMIT} requests today. Please try again tomorrow.`;
+        btn.disabled = false;
+        btn.textContent = needValue === 'BuildWeb' ? 'Send my request' : 'Send & get my audit';
+        return;
       }
 
       status.textContent = 'Sending your details...';
 
       const get = (id) => document.getElementById(id)?.value.trim() || '';
+
       const country = get('location') === 'Other' ? get('location-other') : get('location');
 
       const leadData = {
@@ -343,7 +323,7 @@ if (leadForm) {
         company: get('company'),
         email: get('email'),
         country,
-        ip: key,
+        ip,
         timestamp: serverTimestamp(),
         processedState: 'unread',
         consentGiven: true,
@@ -364,10 +344,7 @@ if (leadForm) {
         leadData.youtube = get('yt');
       }
 
-      const batch = writeBatch(db);
-      batch.set(limitRef, limitData);
-      batch.set(doc(collection(db, 'leads')), leadData);
-      await batch.commit();
+      await addDoc(collection(db, 'leads'), leadData);
 
       status.style.color = '#1a7a3c';
       status.textContent = needValue === 'BuildWeb'
@@ -381,12 +358,10 @@ if (leadForm) {
     } catch (err) {
       console.error(err);
       status.style.color = '#c0392b';
-      status.textContent = err?.code === 'permission-denied'
-        ? 'Please check your details (valid email, business name, country) and try again.'
-        : 'Something went wrong — please try again.';
+      status.textContent = 'Something went wrong — please try again.';
     } finally {
       btn.disabled = false;
-      btn.textContent = btnLabel();
+      btn.textContent = needValue === 'BuildWeb' ? 'Send my request' : 'Send & get my audit';
     }
   });
 }
